@@ -1,4 +1,4 @@
-# plusfries
+# plusfries [![Build Status](https://travis-ci.com/pietvanzoen/plusfries.svg?branch=master)](https://travis-ci.com/pietvanzoen/plusfries)
 
 +:fries: as a service
 
