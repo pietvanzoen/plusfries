@@ -1,0 +1,19 @@
+{
+  "name": "plusfries",
+  "version": "0.0.0",
+  "description": "+🍟 as a service",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pietvanzoen/plusfries.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pietvanzoen/plusfries/issues"
+  },
+  "homepage": "https://github.com/pietvanzoen/plusfries#readme"
+}
