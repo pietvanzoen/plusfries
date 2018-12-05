@@ -1,19 +1,14 @@
 FROM node:alpine
-
 WORKDIR /app
-
-COPY ./package.json .
-COPY ./package-lock.json .
+COPY ./package.json ./package-lock.json ./
 
 ENV NODE_ENV production
 RUN npm install
 
 COPY . .
 
-ENV USER plusfries
-RUN adduser -S ${USER}
-RUN chown -R ${USER} /app
-USER ${USER}
+RUN adduser -S plusfries
+RUN chown -R plusfries /app
+USER plusfries
 
-ENV PORT 8080
 CMD ["npm", "start"]
