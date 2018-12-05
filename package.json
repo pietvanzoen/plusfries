@@ -4,7 +4,9 @@
   "description": "+🍟 as a service",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint .",
+    "fmt": "prettier --no-color --write '**/*.{md,js}'"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/pietvanzoen/plusfries/issues"
   },
-  "homepage": "https://github.com/pietvanzoen/plusfries#readme"
+  "homepage": "https://github.com/pietvanzoen/plusfries#readme",
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-config-prettier": "^3.3.0",
+    "prettier": "^1.15.3"
+  }
 }
