@@ -12,4 +12,5 @@ RUN adduser -S plusfries
 RUN mkdir -p /data/ && chown -R plusfries /data
 USER plusfries
 
+ENV PORT 8080
 CMD ["npm", "start"]
