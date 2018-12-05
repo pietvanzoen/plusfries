@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "26838ee7-aa9c-4e4d-bbf4-787ce162d26d",
+		"name": "Plusfries",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Make a plus request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "151cac89-481b-4c39-9036-1d6a26dd535c",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response should contain expected properties\", function () { ",
+							"    pm.response.to.have.jsonBody(\"id\"); ",
+							"    pm.response.to.have.jsonBody(\"location\"); ",
+							"    pm.response.to.have.jsonBody(\"createdAt\"); ",
+							"    pm.response.to.have.jsonBody(\"updatedAt\"); ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\": \"https://piet.me\"\n}"
+				},
+				"url": {
+					"raw": "{{server}}/plus",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"plus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get pluses for https://piet.me",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2bf13c99-3a17-4781-b953-0331472b6892",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"response should contain correct count and latest\", function () { ",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.count).to.eql(pm.info.iteration + 1)",
+							"    pm.response.to.have.jsonBody(\"latest\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{server}}/plus/https%3A%2F%2Fpiet.me",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"plus",
+						"https%3A%2F%2Fpiet.me"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

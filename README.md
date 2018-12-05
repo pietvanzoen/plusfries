@@ -4,9 +4,14 @@
 
 ## API
 
-### `POST /v1/plus`
+### `POST /plus`
 
 Body:
 
-- `url` URL - related url for upvote
-- `wibble` String - honeypot string
+- `location` URL - related url for upvote
+
+### `GET /plus/:location`
+
+Body:
+
+- `location` URL - related url for upvote

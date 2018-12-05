@@ -7,7 +7,7 @@
     "start": "node app.js | ./node_modules/.bin/bunyan",
     "start:json": "node app.js",
     "start:dev": "nodemon ./app.js | ./node_modules/.bin/bunyan -o short -l debug",
-    "test": "jest",
+    "test:api": "CI=true newman run -n 3 -e tests/local.postman_environment.json tests/plusfries.postman_collection.json",
     "lint": "eslint .",
     "fmt": "prettier --no-color --write '**/*.{md,js}'"
   },
@@ -24,13 +24,13 @@
   "devDependencies": {
     "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.3.0",
+    "newman": "^4.2.2",
     "nodemon": "^1.18.7",
     "prettier": "^1.15.3"
   },
   "dependencies": {
     "bunyan": "^1.8.12",
     "debug": "^4.1.0",
-    "lodash": "^4.17.11",
     "restify": "^7.2.3",
     "sequelize": "^4.41.2",
     "sqlite3": "^4.0.4"

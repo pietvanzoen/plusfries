@@ -1,9 +1,12 @@
 version: '3.3'
 services:
-  plusfries:
+  test-server:
     build: .
     image: plusfries:latest
     ports:
-      - 8080:8080
+      - 9090:9090
     volumes:
-      - ./plusfries.db:/app/plusfries.db
+      - $HOME/.npm:/.npm
+    environment:
+      - DB_STORAGE=":memory:"
+      - PORT=9090
