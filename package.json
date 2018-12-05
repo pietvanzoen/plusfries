@@ -4,6 +4,7 @@
   "description": "+🍟 as a service",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "jest",
     "lint": "eslint .",
     "fmt": "prettier --no-color --write '**/*.{md,js}'"
@@ -22,5 +23,8 @@
     "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.3.0",
     "prettier": "^1.15.3"
+  },
+  "dependencies": {
+    "restify": "^7.2.3"
   }
 }
