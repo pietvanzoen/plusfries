@@ -8,9 +8,6 @@ RUN npm install
 COPY . .
 
 ENV DB_STORAGE /data/plusfries.db
-RUN adduser -S plusfries
-RUN mkdir -p /data/ && chown -R plusfries /data
-USER plusfries
-
+RUN mkdir -p /data/
 ENV PORT 8080
 CMD ["npm", "start"]

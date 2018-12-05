@@ -10,7 +10,9 @@ require("./lib/routes")(server);
 db.authenticate()
   .then(() => {
     logger.info("Database connection has been established successfully.");
-    Plus.sync();
+    return Plus.sync();
+  })
+  .then(() => {
     server.listen(PORT, function() {
       logger.info("%s listening at %s", server.name, server.url); // eslint-disable-line
     });
