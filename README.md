@@ -8,10 +8,10 @@
 
 Body:
 
-- `location` URL - related url for upvote
+-   `location` URL - related url for upvote
 
 ### `GET /plus/:location`
 
 Body:
 
-- `location` URL - related url for upvote
+-   `location` URL - related url for upvote
