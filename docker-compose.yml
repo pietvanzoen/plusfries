@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  plusfries:
+    build: .
+    image: plusfries:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - ./plusfries.db:/app/plusfries.db
