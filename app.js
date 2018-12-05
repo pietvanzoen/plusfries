@@ -1,23 +1,20 @@
-const pkg = require("./package.json");
-const restify = require("restify");
-const DB = require("./lib/db");
+const db = require("./lib/db");
+const Plus = require("./lib/plus-model");
 
-const server = restify.createServer({
-  name: pkg.name,
-  version: pkg.version
-});
+const server = require("./lib/server")();
+const logger = require("./lib/logger");
 
-const db = new DB();
+require("./lib/routes")(server);
 
-server.use(restify.plugins.acceptParser(server.acceptable));
-server.use(restify.plugins.queryParser());
-server.use(restify.plugins.bodyParser());
-
-server.get("/v1/plus/:url", function(req, res, next) {
-  res.send(db.findAll());
-  return next();
-});
-
-server.listen(8080, function() {
-  console.log("%s listening at %s", server.name, server.url); // eslint-disable-line
-});
+db.authenticate()
+  .then(() => {
+    logger.info("Database connection has been established successfully.");
+    Plus.sync();
+    server.listen(8080, function() {
+      logger.info("%s listening at %s", server.name, server.url); // eslint-disable-line
+    });
+  })
+  .catch(err => {
+    logger.error("Unable to connect to the database:", err);
+    process.exit(1);
+  });
