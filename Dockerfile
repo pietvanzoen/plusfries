@@ -7,8 +7,9 @@ RUN npm install
 
 COPY . .
 
+ENV DB_STORAGE /data/plusfries.db
 RUN adduser -S plusfries
-RUN chown -R plusfries /app
+RUN mkdir -p /data/ && chown -R plusfries /data
 USER plusfries
 
 CMD ["npm", "start"]
