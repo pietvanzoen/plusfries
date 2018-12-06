@@ -3,6 +3,7 @@ cache: npm
 install:
   - npm install
 before_script:
+  - touch test.db
   - docker-compose up -d --build test-server
 script:
   - npm run lint

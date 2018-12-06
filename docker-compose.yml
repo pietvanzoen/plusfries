@@ -7,6 +7,6 @@ services:
       - 9090:9090
     volumes:
       - $HOME/.npm:/.npm
+      - ./test.db:/data/plusfries.db
     environment:
-      - "DB_STORAGE=:memory:"
       - PORT=9090
