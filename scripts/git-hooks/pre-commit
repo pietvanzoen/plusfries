@@ -1,0 +1,3 @@
+#!/bin/bash
+
+npm run lint || (echo; echo ">> Linting errors found. Run \`npm run fmt\` to fix. Be sure to \`git add\` your newly formatted changes before committing."; exit 1)

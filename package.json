@@ -10,7 +10,8 @@
     "start:test-server": "rm -f test.db && touch test.db && docker-compose down && docker-compose up -d --build test-server",
     "test:api": "CI=true newman run -n 3 -e tests/local.postman_environment.json tests/plusfries.postman_collection.json",
     "lint": "eslint .",
-    "fmt": "prettier --no-color --write '**/*.{md,js}'"
+    "fmt": "prettier --no-color --write '**/*.{md,js}'",
+    "postinstall": "./scripts/git-hooks-install"
   },
   "repository": {
     "type": "git",
