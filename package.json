@@ -7,7 +7,7 @@
     "start": "node app.js | ./node_modules/.bin/bunyan",
     "start:json": "node app.js",
     "start:dev": "nodemon ./app.js | ./node_modules/.bin/bunyan -o short -l debug",
-    "start:test-server": "echo -n > test.db && docker-compose up -d --force-recreate --build test-server",
+    "start:test-server": "rm -f test.db && touch test.db && docker-compose down && docker-compose up -d --build test-server",
     "test:api": "CI=true newman run -n 3 -e tests/local.postman_environment.json tests/plusfries.postman_collection.json",
     "lint": "eslint .",
     "fmt": "prettier --no-color --write '**/*.{md,js}'"
