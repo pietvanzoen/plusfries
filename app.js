@@ -1,9 +1,12 @@
+require("dotenv-safe").config();
+
 const db = require("./lib/db");
 const Plus = require("./lib/plus-model");
-const PORT = process.env.PORT || 8080;
+const { PORT } = process.env;
 
 const server = require("./lib/server")();
-const logger = require("./lib/logger");
+const logger = require("./lib/logger")("app");
+logger.setLevel("TRACE");
 
 require("./lib/routes")(server);
 

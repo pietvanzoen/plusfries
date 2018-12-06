@@ -4,13 +4,13 @@
   "description": "+🍟 as a service",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js | ./node_modules/.bin/bunyan",
-    "start:json": "node app.js",
-    "start:dev": "nodemon ./app.js | ./node_modules/.bin/bunyan -o short -l debug",
+    "start": "node app.js",
+    "start:dev": "nodemon ./app.js",
     "start:test-server": "rm -f test.db && touch test.db && docker-compose down && docker-compose up -d --build test-server",
     "test:api": "CI=true newman run -n 3 -e tests/local.postman_environment.json tests/plusfries.postman_collection.json",
     "lint": "eslint .",
     "fmt": "prettier --no-color --write '**/*.{md,js}'",
+    "preinstall": "cp -n .env.example .env",
     "postinstall": "./scripts/git-hooks-install"
   },
   "repository": {
@@ -31,8 +31,10 @@
     "prettier": "^1.15.3"
   },
   "dependencies": {
-    "bunyan": "^1.8.12",
-    "debug": "^4.1.0",
+    "colors": "^1.3.2",
+    "dotenv-safe": "^6.1.0",
+    "loglevel": "^1.6.1",
+    "morgan": "^1.9.1",
     "restify": "^7.2.3",
     "sequelize": "^4.41.2",
     "sqlite3": "^4.0.4"
