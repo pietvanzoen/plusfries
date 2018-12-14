@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "prestart:dev": "npm run build",
     "start:dev": "nodemon ./app.js",
     "start:test-server": "rm -f test.db && touch test.db && docker-compose down && docker-compose up -d --build test-server",
     "test:api": "CI=true newman run -n 3 -e tests/local.postman_environment.json tests/plusfries.postman_collection.json",

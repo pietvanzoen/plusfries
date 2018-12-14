@@ -3,6 +3,7 @@
 set -e
 
 TEMP_DIR="$(mktemp -d)"
+mkdir -p ./public
 
 echo "start minifying..."
 # minify css
