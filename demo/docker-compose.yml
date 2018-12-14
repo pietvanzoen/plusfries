@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  demo-plusfries-server:
+    build: ../
+    image: plusfries:demo
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/data
+    environment:
+      - DB_STORAGE=/data/demo.db
+  demo-website:
+    image: nginx:alpine
+    ports:
+      - 4567:80
+    volumes:
+      - ./example.html:/usr/share/nginx/html/index.html

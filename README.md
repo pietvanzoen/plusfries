@@ -2,6 +2,15 @@
 
 +:fries: as a service
 
+## Usage
+
+Add the following to a page where you would like to receive fries.
+
+```html
+<a id="plusfries" class="loading">🍟</a>
+<script src="//<your-plusfries-server>/plusfries.js"></script>
+```
+
 ## API
 
 ### `POST /plus`
