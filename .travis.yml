@@ -7,3 +7,13 @@ before_script:
 script:
   - npm run lint
   - npm run test:api
+after_script:
+  - curl -sL scripts.piet.me/ci/release | bash
+deploy:
+  provider: releases
+  api_key: "$GITHUB_TOKEN"
+  on:
+    tags: true
+env:
+  global:
+    secure: V4iIIN/yf009JTL63lrv1DPJA9tA29K/HUDh76DkU5hPyR+zU76YtkZY7HhDnQdV1xnP+gAx8XH5N4wBKz44cnyMxNELLzkZxp1FoSX1Tiz5b1tfOAySrgV38J4n6IO4iKcqJ0Sy4xoW5e3QDMGHOuUg8r740OP1mUlw712MI/hf2WKafw53ECPM9cgm0CmRB8Ta+QVTfyxLAz1fFRvC/v8oWOTssUrT2BYf/D7k/J1qltY3sHI+GFO7bIYKI5enReTioVWEL0rtYQyv2PVzEl0R/93z9Hom3EAxosDD3zuLU45spk3soJsOTQKfWDaVqoovHitayHB2AuDHvoazNNWeUsEpw2CVdGUXQVZChZV3efpNdF60XsjLfR8COsWPlIHpXShRsZ/JJ98fl4gBOeGemcXHy6a7KpeYOy6Y3HctJw2+ptb1jG5aO8XlNWTTcuEN9+jRRqSdWHylZtSZNO7nxIbTAReEouonLSlqJC3dKbbkrACwFbkniOC+VReigvC1x7gyN9cOz2jFk4RDGBrHUaO6DirASVkamL+TT9oPhmVu2ZZDN5YCzu1LkNjLs7f1VitHC4nNYawxilN22sm2+kgIN4FkHrxoOBI/sOIfUt9ZUO0L+1A90k0UBTzBg+3SSQ98OpyGprw7uQeyQSkTD08Ni2cemtHw0TJFxvI=
