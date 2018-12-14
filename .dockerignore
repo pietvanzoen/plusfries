@@ -1,2 +1,7 @@
+.git
 node_modules
 *.db
+.env
+tests
+public
+demo
