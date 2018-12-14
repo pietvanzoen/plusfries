@@ -1,0 +1,1 @@
+!function(e,n){window.PLSFRS="http://localhost:8081";const t=window.PLSFRS+"/plusfries.js",s=e.createElement(n),c=e.getElementsByTagName(n)[0];s.async=!0,s.src=t,c.parentNode.insertBefore(s,c)}(document,"script");

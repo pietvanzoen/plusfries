@@ -8,9 +8,10 @@
     "start:dev": "nodemon ./app.js",
     "start:test-server": "rm -f test.db && touch test.db && docker-compose down && docker-compose up -d --build test-server",
     "test:api": "CI=true newman run -n 3 -e tests/local.postman_environment.json tests/plusfries.postman_collection.json",
+    "build": "./scripts/widget.sh",
     "lint": "eslint .",
     "fmt": "prettier --no-color --write '**/*.{md,js}'",
-    "preinstall": "cp -n .env.example .env",
+    "preinstall": "test -f .env || cp -n .env.example .env",
     "postinstall": "./scripts/git-hooks-install"
   },
   "repository": {
@@ -24,11 +25,17 @@
   },
   "homepage": "https://github.com/pietvanzoen/plusfries#readme",
   "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "cssnano": "^4.1.7",
     "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.3.0",
     "newman": "^4.2.2",
     "nodemon": "^1.18.7",
-    "prettier": "^1.15.3"
+    "postcss-cli": "^6.0.1",
+    "prettier": "^1.15.3",
+    "terser": "^3.11.0"
   },
   "dependencies": {
     "colors": "^1.3.2",
