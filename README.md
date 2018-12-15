@@ -8,7 +8,7 @@ Add the following to a page where you would like to receive fries.
 
 ```html
 <a id="plusfries" class="loading">🍟</a>
-<script src="//<your-plusfries-server>/plusfries.js"></script>
+<script async src="//<your-plusfries-server>/plusfries.js"></script>
 ```
 
 ## API
