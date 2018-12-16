@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Compress and minify widget
 set -e
 
