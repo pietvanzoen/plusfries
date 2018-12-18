@@ -40,7 +40,7 @@ function createServer() {
     } else {
       logger.debug(`${error}`);
     }
-    morganLogger(req, res, function next() {});
+    if (!route) morganLogger(req, res, function next() {});
   });
 
   return server;
