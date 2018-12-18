@@ -1,14 +1,12 @@
-version: '3.3'
+version: "3.3"
 services:
   test-server:
     build: .
     image: plusfries:latest
     ports:
       - 9090:9090
-    volumes:
-      - $HOME/.npm:/.npm
-      - ./test.db:/data/plusfries.db
     env_file:
       - .env.example
     environment:
+      - THROTTLE_RATE=100
       - PORT=9090
