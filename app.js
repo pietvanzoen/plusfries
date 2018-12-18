@@ -2,11 +2,12 @@ require("dotenv-safe").config();
 
 const db = require("./server/db");
 const Plus = require("./server/plus-model");
-const { PORT } = process.env;
+const { PORT, LOG_LEVEL } = process.env;
 
 const server = require("./server/server")();
 const logger = require("./server/logger")("app");
-logger.setLevel("TRACE");
+logger.setLevel(LOG_LEVEL);
+logger[LOG_LEVEL.toLowerCase()](`LOG_LEVEL=${LOG_LEVEL}`);
 
 require("./server/routes")(server);
 
