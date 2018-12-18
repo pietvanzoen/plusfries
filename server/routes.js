@@ -6,6 +6,9 @@ const { getEmbedScript } = require("./embed");
 const { decodeLocation, assertOriginMatchesLocation } = require("./middleware");
 
 const THROTTLE_MODE = process.env.THROTTLE_MODE || "ip";
+const THROTTLE_RATE = Number(process.env.THROTTLE_RATE) || 0.5;
+log.debug(`THROTTLE_MODE=${THROTTLE_MODE}`);
+log.debug(`THROTTLE_RATE=${THROTTLE_RATE}`);
 
 function createRoutes(server) {
   server.get("/", (req, res, next) => {
@@ -28,7 +31,11 @@ function createRoutes(server) {
 
   server.post(
     "/plus",
-    restify.plugins.throttle({ burst: 1, rate: 0.5, [THROTTLE_MODE]: true }),
+    restify.plugins.throttle({
+      burst: 1,
+      rate: THROTTLE_RATE,
+      [THROTTLE_MODE]: true
+    }),
     decodeLocation,
     assertOriginMatchesLocation,
     function(req, res, next) {
