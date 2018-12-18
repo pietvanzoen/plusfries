@@ -17,10 +17,10 @@ function assertOriginMatchesLocation(req, res, next) {
 }
 
 function decodeLocation(req, res, next) {
-  if (req.body.location) {
+  if (req.body && req.body.location) {
     req.body.location = decodeURIComponent(req.body.location);
   }
-  if (req.params.location) {
+  if (req.params && req.params.location) {
     req.params.location = decodeURIComponent(req.params.location);
   }
   next();
