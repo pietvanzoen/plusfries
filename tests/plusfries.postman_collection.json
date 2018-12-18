@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "26838ee7-aa9c-4e4d-bbf4-787ce162d26d",
+		"_postman_id": "99f4126f-942a-4e6d-98db-0d576a07b2b9",
 		"name": "plusfries",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -36,6 +36,11 @@
 						"name": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Origin",
+						"value": "https://piet.me",
+						"type": "text"
 					}
 				],
 				"body": {
@@ -55,7 +60,7 @@
 			"response": []
 		},
 		{
-			"name": "Get pluses for https://piet.me",
+			"name": "Get pluses for path",
 			"event": [
 				{
 					"listen": "test",
