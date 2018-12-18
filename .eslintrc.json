@@ -1,10 +1,7 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "prettier"],
   "parserOptions": {
-    "ecmaVersion": 8
+    "ecmaVersion": 2018
   },
   "env": {
     "node": true,
