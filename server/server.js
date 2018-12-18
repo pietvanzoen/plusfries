@@ -28,16 +28,19 @@ function createServer() {
   const cors = corsMiddleware({ origins: ["*"] });
   server.pre(cors.preflight);
   server.use(cors.actual);
-  server.use(morgan("short", { stream: loggerStream }));
+  const morganLogger = morgan("short", { stream: loggerStream });
+  server.use(morganLogger);
   server.use(restify.plugins.acceptParser(server.acceptable));
   server.use(restify.plugins.queryParser());
   server.use(restify.plugins.bodyParser());
 
-  server.on("restifyError", function(req, res, error, callback) {
+  server.on("after", function(req, res, route, error) {
     if (!error.statusCode || error.statusCode > 499) {
-      logger.error(error.message, error);
+      logger.error(`${error}`, error);
+    } else {
+      logger.debug(`${error}`);
     }
-    return callback();
+    morganLogger(req, res, function next() {});
   });
 
   return server;
