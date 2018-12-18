@@ -2,7 +2,7 @@ const fs = require("fs");
 const log = require("./logger")("embed");
 
 const cache = {};
-log.debug("Precaching script");
+log.debug("Precaching plusfries.js script");
 const script = fs.readFileSync("./public/plusfries.js").toString();
 
 module.exports = {
