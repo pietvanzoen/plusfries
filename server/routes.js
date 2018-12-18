@@ -3,7 +3,12 @@ const restify = require("restify");
 const Plus = require("./plus-model");
 const { hash } = require("./util");
 const { getEmbedScript } = require("./embed");
-const { decodeLocation, assertOriginMatchesLocation } = require("./middleware");
+const {
+  catchAsyncErrors,
+  decodeLocation,
+  assertOriginMatchesLocation
+} = require("./middleware");
+const log = require("./logger")("routes");
 
 const THROTTLE_MODE = process.env.THROTTLE_MODE || "ip";
 const THROTTLE_RATE = Number(process.env.THROTTLE_RATE) || 0.5;
@@ -16,18 +21,22 @@ function createRoutes(server) {
     return next();
   });
 
-  server.get("/plus/:location", async function(req, res, next) {
-    const { count, rows } = await Plus.findAndCountAll({
-      where: {
-        location: hash(decodeURIComponent(req.params.location))
-      }
-    });
-    res.send({
-      count,
-      latest: rows[rows.length - 1]
-    });
-    return next();
-  });
+  server.get(
+    "/plus/:location",
+    decodeLocation,
+    catchAsyncErrors(async function(req, res, next) {
+      const { location } = req.params;
+      log.debug(`Fetching count for ${location}`);
+      const { count, rows } = await Plus.findAndCountAll({
+        where: { location: hash(location) }
+      });
+      res.send({
+        count,
+        latest: rows[rows.length - 1]
+      });
+      next();
+    })
+  );
 
   server.post(
     "/plus",
@@ -38,19 +47,11 @@ function createRoutes(server) {
     }),
     decodeLocation,
     assertOriginMatchesLocation,
-    function(req, res, next) {
-      return Plus.create({
-        location: req.body.location
-      })
-        .then(resp => {
-          res.send(resp);
-          next();
-        })
-        .catch(err => {
-          res.send(err);
-          next();
-        });
-    }
+    catchAsyncErrors(async function(req, res, next) {
+      log.debug(`Creating upvote for ${req.body.location}`);
+      res.send(201, await Plus.create({ location: req.body.location }));
+      next();
+    })
   );
 
   server.get("/plusfries.js", restify.plugins.gzipResponse(), function(
@@ -68,7 +69,7 @@ function createRoutes(server) {
 
   server.get("/healthcheck", (req, res, next) => {
     res.send({ ok: true });
-    return next();
+    next();
   });
 }
 
