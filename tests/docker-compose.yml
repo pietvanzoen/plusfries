@@ -1,12 +1,12 @@
 version: "3.3"
 services:
   test-server:
-    build: .
+    build: ../
     image: plusfries:latest
     ports:
       - 9090:9090
     env_file:
-      - .env.example
+      - ../.env.example
     environment:
       - THROTTLE_RATE=100
       - PORT=9090
