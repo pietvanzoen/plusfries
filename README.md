@@ -24,3 +24,13 @@ Body:
 Body:
 
 -   `location` URL - related url for upvote
+
+## Server Configuration
+
+### Environment variables
+
+* `PORT` - Server listening port.
+* `DB_STORAGE` - Path to sqlite database file.
+* `LOG_LEVEL` - Logging level.
+* `THROTTLE_MODE` - Either `ip`, `xff`, or `username`. See [Restify Throggle Plugin Docs](http://restify.com/docs/plugins-api/#throttle) for more info. Default `ip`.
+* `THROTTLE_RATE` - Number of `POST /plus` requests per second. Can be a fraction. Default `0.5`.
