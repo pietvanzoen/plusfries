@@ -7,7 +7,7 @@
     "start:prod": "node app.js",
     "prestart": "npm run build",
     "start": "nodemon ./app.js",
-    "start:test-server": "rm -f test.db && touch test.db && docker-compose down && docker-compose up -d --build test-server",
+    "start:test-server": "docker-compose up -d --build --force-recreate test-server",
     "test:api": "CI=true newman run -n 3 -e tests/local.postman_environment.json tests/plusfries.postman_collection.json",
     "build": "./scripts/widget.sh",
     "lint": "eslint .",
