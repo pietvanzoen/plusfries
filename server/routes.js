@@ -5,6 +5,8 @@ const { hash } = require("./util");
 const { getEmbedScript } = require("./embed");
 const { decodeLocation, assertOriginMatchesLocation } = require("./middleware");
 
+const THROTTLE_MODE = process.env.THROTTLE_MODE || "ip";
+
 function createRoutes(server) {
   server.get("/", (req, res, next) => {
     res.send({ version, name });
@@ -26,7 +28,7 @@ function createRoutes(server) {
 
   server.post(
     "/plus",
-    restify.plugins.throttle({ burst: 10, rate: 1, xff: true }),
+    restify.plugins.throttle({ burst: 1, rate: 0.5, [THROTTLE_MODE]: true }),
     decodeLocation,
     assertOriginMatchesLocation,
     function(req, res, next) {
