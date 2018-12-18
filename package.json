@@ -13,7 +13,10 @@
     "lint": "eslint .",
     "fmt": "prettier --no-color --write '**/*.{md,js}'",
     "preinstall": "test -f .env || cp -n .env.example .env",
-    "postinstall": "./scripts/git-hooks-install"
+    "postinstall": "./scripts/git-hooks-install",
+    "demo": "docker-compose -f ./demo/docker-compose.yml up -d && echo 'demo site running at http://localhost:4567'",
+    "demo:rebuild": "docker-compose -f ./demo/docker-compose.yml build",
+    "demo:stop": "docker-compose -f ./demo/docker-compose.yml down"
   },
   "repository": {
     "type": "git",
