@@ -2,7 +2,7 @@ const { version, name } = require("../package.json");
 const restify = require("restify");
 const Plus = require("./plus-model");
 const { hash } = require("./util");
-const { getEmbedScript } = require("./embed");
+const { getEmbedScriptForUrl, getUrlFromRequest } = require("./embed");
 const {
   catchAsyncErrors,
   decodeLocation,
@@ -59,7 +59,7 @@ function createRoutes(server) {
     res,
     next
   ) {
-    const script = getEmbedScript(req.header("host"));
+    const script = getEmbedScriptForUrl(getUrlFromRequest(req));
     res.set("Content-Length", script.length);
     res.set("Content-Type", "application/javascript");
     res.cache({ maxAge: 3600 });

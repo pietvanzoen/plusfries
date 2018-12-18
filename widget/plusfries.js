@@ -1,4 +1,4 @@
-const ENDPOINT = "//%PLUSFRIES_HOST%/plus";
+const ENDPOINT = "%PLUSFRIES_URL%/plus";
 const LOCATION = encodeURIComponent(window.location.href);
 
 const puntzak = document.querySelector("#plusfries");
