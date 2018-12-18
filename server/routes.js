@@ -3,6 +3,7 @@ const restify = require("restify");
 const Plus = require("./plus-model");
 const { hash } = require("./util");
 const { getEmbedScript } = require("./embed");
+const { decodeLocation, assertOriginMatchesLocation } = require("./middleware");
 
 function createRoutes(server) {
   server.get("/", (req, res, next) => {
@@ -26,9 +27,11 @@ function createRoutes(server) {
   server.post(
     "/plus",
     restify.plugins.throttle({ burst: 10, rate: 1, xff: true }),
+    decodeLocation,
+    assertOriginMatchesLocation,
     function(req, res, next) {
       return Plus.create({
-        location: decodeURIComponent(req.body.location)
+        location: req.body.location
       })
         .then(resp => {
           res.send(resp);
