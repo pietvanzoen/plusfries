@@ -1,6 +1,6 @@
 const pkg = require("../package.json");
 const restify = require("restify");
-const logger = require("./logger")("restify");
+const logger = require("./logger")("api");
 const morgan = require("morgan");
 const corsMiddleware = require("restify-cors-middleware");
 
