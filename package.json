@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start:prod": "node app.js",
-    "prestart": "npm run build",
-    "start": "nodemon ./app.js",
+    "start": "nodemon --exec 'npm run build && node app.js' --ignore public",
     "start:test-server": "docker-compose up -d --build --force-recreate test-server",
     "test:api": "CI=true newman run -n 3 -e tests/local.postman_environment.json tests/plusfries.postman_collection.json",
     "build": "./scripts/widget.sh",
@@ -29,14 +28,13 @@
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "cssnano": "^4.1.7",
     "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.3.0",
     "newman": "^4.2.2",
     "nodemon": "^1.18.7",
-    "postcss-cli": "^6.0.1",
     "prettier": "^1.15.3",
-    "terser": "^3.11.0"
+    "terser": "^3.11.0",
+    "uglifycss": "0.0.29"
   },
   "dependencies": {
     "assert-plus": "^1.0.0",
