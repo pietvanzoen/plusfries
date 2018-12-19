@@ -30,7 +30,10 @@ function onPlusFry() {
   const body = new FormData();
   body.append("location", LOCATION);
   fetch(ENDPOINT, { method, body })
-    .then(res => res.json())
+    .then(res => {
+      if (res.status < 300) return res;
+      throw res;
+    })
     .then(() => (fetching = false))
     .catch(() => fritesDec() && (fetching = false));
 }
