@@ -8,7 +8,7 @@ const stream = require("stream");
 const loggerStream = new stream.Writable({
   write: (chunk, encoding, next) => {
     const str = chunk.toString().trim();
-    const status = Number(str.match(/ \d\d\d /)[0]);
+    const status = Number((str.match(/ \d\d\d /) || [])[0]);
     if (status > 499) {
       logger.error(str);
     } else {
