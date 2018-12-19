@@ -1,7 +1,6 @@
 const { version, name } = require("../package.json");
 const restify = require("restify");
-const Plus = require("./plus-model");
-const { hash } = require("./util");
+const Location = require("./location-model");
 const { getEmbedScriptForUrl, getUrlFromRequest } = require("./embed");
 const {
   catchAsyncErrors,
@@ -25,16 +24,19 @@ function createRoutes(server) {
   server.get(
     "/plus/:location",
     decodeLocation,
-    validateURL('params', 'location'),
+    validateURL("params", "location"),
     catchAsyncErrors(async function(req, res, next) {
-      const { location } = req.params;
-      log.debug(`Fetching count for ${location}`);
-      const { count, rows } = await Plus.findAndCountAll({
-        where: { location: hash(location) }
-      });
+      const locationString = req.params.location;
+      log.debug(`Fetching count for ${locationString}`);
+      let location = await Location.findOneWithLocation(locationString);
+      if (!location) {
+        location = Location.build({ location: locationString });
+      }
+      const json = location.toJSON();
       res.send({
-        count,
-        latest: rows[rows.length - 1]
+        count: json.votes,
+        latest: json.updatedAt || null,
+        location: locationString
       });
       next();
     })
@@ -48,11 +50,11 @@ function createRoutes(server) {
       [THROTTLE_MODE]: true
     }),
     decodeLocation,
-    validateURL('body', 'location'),
+    validateURL("body", "location"),
     assertOriginMatchesLocation,
     catchAsyncErrors(async function(req, res, next) {
       log.debug(`Creating upvote for ${req.body.location}`);
-      res.send(201, await Plus.create({ location: req.body.location }));
+      res.send(await Location.upvoteOrCreate(req.body.location));
       next();
     })
   );

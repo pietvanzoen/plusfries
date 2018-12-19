@@ -1,7 +1,7 @@
 require("dotenv-safe").config();
 
 const db = require("./server/db");
-const Plus = require("./server/plus-model");
+const Location = require("./server/location-model");
 const { PORT, LOG_LEVEL } = process.env;
 
 const server = require("./server/server")();
@@ -14,7 +14,7 @@ require("./server/routes")(server);
 db.authenticate()
   .then(() => {
     logger.info("Database connection has been established successfully.");
-    return Plus.sync();
+    return Location.sync();
   })
   .then(() => {
     server.listen(PORT, function() {

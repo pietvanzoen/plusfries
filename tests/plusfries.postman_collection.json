@@ -14,14 +14,7 @@
 						"id": "151cac89-481b-4c39-9036-1d6a26dd535c",
 						"exec": [
 							"pm.test(\"response is ok\", function () {",
-							"    pm.response.to.have.status(201);",
-							"});",
-							"",
-							"pm.test(\"response should contain expected properties\", function () { ",
-							"    pm.response.to.have.jsonBody(\"id\"); ",
-							"    pm.response.to.have.jsonBody(\"location\"); ",
-							"    pm.response.to.have.jsonBody(\"createdAt\"); ",
-							"    pm.response.to.have.jsonBody(\"updatedAt\"); ",
+							"    pm.response.to.have.status(200);",
 							"});"
 						],
 						"type": "text/javascript"
