@@ -6,7 +6,8 @@ const { getEmbedScriptForUrl, getUrlFromRequest } = require("./embed");
 const {
   catchAsyncErrors,
   decodeLocation,
-  assertOriginMatchesLocation
+  assertOriginMatchesLocation,
+  validateURL
 } = require("./middleware");
 const log = require("./logger")("routes");
 
@@ -24,6 +25,7 @@ function createRoutes(server) {
   server.get(
     "/plus/:location",
     decodeLocation,
+    validateURL('params', 'location'),
     catchAsyncErrors(async function(req, res, next) {
       const { location } = req.params;
       log.debug(`Fetching count for ${location}`);
@@ -46,6 +48,7 @@ function createRoutes(server) {
       [THROTTLE_MODE]: true
     }),
     decodeLocation,
+    validateURL('body', 'location'),
     assertOriginMatchesLocation,
     catchAsyncErrors(async function(req, res, next) {
       log.debug(`Creating upvote for ${req.body.location}`);
