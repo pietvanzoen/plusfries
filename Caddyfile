@@ -1,0 +1,5 @@
+plusfries-hyper.piet.me {
+  proxy / plusfries:8080 {
+    transparent
+  }
+}
